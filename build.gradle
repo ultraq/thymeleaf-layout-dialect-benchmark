@@ -14,32 +14,26 @@
  * limitations under the License.
  */
 
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'jetty'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/1.3.1/gradle-support.gradle'
+plugins {
+	id 'groovy'
+	id 'org.springframework.boot' version '2.0.1.RELEASE'
+}
+apply plugin: 'io.spring.dependency-management'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/2.1.0/gradle-support.gradle'
 
-project.description = 'A basic web application to test the memory profile of the Thymeleaf Layout Dialect'
-project.archivesBaseName = 'thymeleaf-layout-dialect-benchmark'
-project.sourceCompatibility = '1.8'
-
-jettyRun.contextPath = 'thymeleaf-layout-dialect-benchmark'
-war.archiveName = 'thymeleaf-layout-dialect-benchmark'
+description = 'A basic web application to test the memory profile of the Thymeleaf Layout Dialect'
+archivesBaseName = 'thymeleaf-layout-dialect-benchmark'
+sourceCompatibility = '1.8'
 
 configurations.all {
 	resolutionStrategy.cacheChangingModulesFor(5, 'minutes')
 }
 
 dependencies {
-	compile('javax.servlet:javax.servlet-api:3.1.0', provided)
 	compile(
-		'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.1.0-SNAPSHOT',
-
-		'org.codehaus.groovy:groovy:2.4.6',
-		'org.springframework:spring-context:4.3.3.RELEASE',
-		'org.springframework:spring-web:4.3.3.RELEASE',
-		'org.springframework:spring-webmvc:4.3.3.RELEASE',
-		'org.thymeleaf:thymeleaf:3.0.2.RELEASE',
-		'org.thymeleaf:thymeleaf-spring4:3.0.2.RELEASE'
+		'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.3.0',
+		'org.codehaus.groovy:groovy:2.4.15',
+		'org.springframework.boot:spring-boot-starter-thymeleaf',
+		'org.springframework.boot:spring-boot-starter-web'
 	)
 }
