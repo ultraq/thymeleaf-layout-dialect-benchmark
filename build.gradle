@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
+import java.time.LocalDateTime
+
 plugins {
 	id 'groovy'
-	id 'org.springframework.boot' version '2.0.1.RELEASE'
+	id 'org.springframework.boot' version '2.1.8.RELEASE'
 }
 apply plugin: 'io.spring.dependency-management'
 apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/2.1.0/gradle-support.gradle'
 
-description = 'A basic web application to test the memory profile of the Thymeleaf Layout Dialect'
+description = 'A basic web application to test the performance of the Thymeleaf Layout Dialect'
 archivesBaseName = 'thymeleaf-layout-dialect-benchmark'
 sourceCompatibility = '1.8'
 
@@ -29,11 +31,33 @@ configurations.all {
 	resolutionStrategy.cacheChangingModulesFor(5, 'minutes')
 }
 
+def dialectVersion = '2.0.5'
+
 dependencies {
 	compile(
-		'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.5.0-SNAPSHOT',
+		"nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:${dialectVersion}",
 		'org.codehaus.groovy:groovy:2.5.8',
 		'org.springframework.boot:spring-boot-starter-thymeleaf',
 		'org.springframework.boot:spring-boot-starter-web'
+	)
+}
+
+bootRun {
+	maxHeapSize '512m'
+}
+
+task jmeter(type: Exec) {
+	def dateTimeString = LocalDateTime.now().format('yyyy-MM-dd_HHmmss')
+	def resultsDir = "build/results/${dialectVersion}"
+	def reportsDir = "build/reports/${dialectVersion}"
+	mkdir resultsDir
+	mkdir reportsDir
+	commandLine(
+		'jmeter',
+		'-n',
+		'-t', 'tests/simulate-load.jmx',
+		'-l', "${resultsDir}/${dateTimeString}.csv",
+		'-e',
+		'-o', "${reportsDir}/${dateTimeString}"
 	)
 }
