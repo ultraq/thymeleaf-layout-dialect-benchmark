@@ -31,8 +31,8 @@ configurations.all {
 
 dependencies {
 	compile(
-		'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.4.0-SNAPSHOT',
-		'org.codehaus.groovy:groovy:2.4.15',
+		'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.5.0-SNAPSHOT',
+		'org.codehaus.groovy:groovy:2.5.8',
 		'org.springframework.boot:spring-boot-starter-thymeleaf',
 		'org.springframework.boot:spring-boot-starter-web'
 	)
