@@ -5,11 +5,10 @@ Thymeleaf Layout Dialect benchmarking web app
 A basic web application to test the memory profile of the
 [Thymeleaf Layout Dialect](https://github.com/ultraq/thymeleaf-layout-dialect).
 
-Testing currently requires some manual coordination of the web application
-(`./gradlew bootRun`) and the JMeter test (`./gradlew jmeter`).  Either the IDE
-can run both in parallel, or use multiple shell sessions to run both in parallel.
+To execute the benchmark, use `./gradlew benchmark` from the command line.  This
+will start the test application, then execute the JMeter test plan over it.
 
-Once run, JMeter's HTML reports can be found in `build/reports/(dialect-version)/(date-time-of-run)`.
+Once completed, JMeter's HTML reports can be found in `build/reports/(dialect-version)/(date-time-of-run)`.
 
 To include YourKit profiling for memory snapshots, then the agent needs to be
 loaded with the web application via the `-agentpath` VM argument.  eg: on MacOS:
