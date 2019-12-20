@@ -14,3 +14,7 @@ To include YourKit profiling for memory snapshots, then the agent needs to be
 loaded with the web application via the `-agentpath` VM argument.  eg: on MacOS:
 
 `-agentpath:"/Applications/YourKit Java Profiler 2015.app/Contents/Resources/bin/mac/libyjpagent.jnilib"`
+
+From version 2.5.0 of the layout dialect, this benchmark is now included as a
+subproject with the layout dialect.  For benchmarking older versions, this repo
+is still the way to do it.
